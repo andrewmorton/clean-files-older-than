@@ -29,6 +29,7 @@ def filter_by_datetime(coll: list, target_days: int) -> filter:
 def remove_items(coll: filter) -> str:
     for item in coll:
         print(f"os.remove() : {item}")
+        # os.remove(item)
     return f"Deleted"
 
 
