@@ -28,15 +28,14 @@ def filter_by_datetime(coll: list, target_days: int) -> filter:
 # delete each item
 def remove_items(coll: filter) -> str:
     for item in coll:
-        print(f"Would os.remove() : {item}")
+        print(f"os.remove() : {item}")
+    return f"Deleted"
 
-    return "Files deleted"
 
-
-def main(target_dir: str):
-    results = remove_items(filter_by_datetime(create_file_list(target_dir, "*"), 0))
+def main(target_dir: str = ".", days_to_keep: int = 30):
+    results = remove_items(filter_by_datetime(create_file_list(target_dir, "*"), days_to_keep))
     print(results)
 
 
 if __name__ == "__main__":
-    main(".")
+    main(os.environ.get("PSQL_BACKUP_DIR"), int(os.environ.get("PSQL_BACKUP_TIMEFRAME")))
